@@ -1,0 +1,291 @@
+<html>
+    <head>
+        <title>Sudoku</title>
+        <link rel="stylesheet" href="bootstrap.css" type="text/css">
+        <link rel="stylesheet" href="style.css" type="text/css">
+    </head>
+<body>
+<script>
+var solution=new Array([],[],[],[],[],[]);
+function tocheck()
+{
+var regx=/[1-6]/;
+var s=1;
+var m=0;
+var a=document.getElementsByClassName("0");
+var mat=new Array([],[],[],[],[],[]);
+for(var i=0;i<6;i++)
+for(var j=0;j<6;j++,s=s+2)
+{
+if(Number(a[s].innerHTML)==0)
+mat[i][j]=Number(a[s-1].value);
+else
+mat[i][j]=Number(a[s].innerHTML);
+}
+for(var i=0;i<6;i++)
+for(var j=0;j<6;j++)
+{
+for(var k=j+1;k<6;k++)
+if(mat[i][j]==mat[i][k] || (regx.test(mat[i][j])==false))
+var m=1;
+for(var k=i+1;k<6;k++)
+if(mat[i][j]==mat[k][j] || (regx.test(mat[i][j])==false))
+var m=1;
+
+}
+if(m==1)
+alert("failure..");
+else
+alert("success.....");
+}
+
+
+
+function table3009()
+{
+var a=document.getElementById("table");
+var b=document.getElementById("button1");
+var c=document.getElementById("button2");
+var d=document.getElementById("button3");
+fun(100,2);
+a.style.visibility="visible";
+b.style.visibility="visible";
+c.style.visibility="hidden";
+d.style.visibility="visible";
+}
+
+
+
+
+
+function fun(q,n)
+{
+if(n>0)
+{
+var a=document.getElementsByClassName(q);
+var arr=[1,2,3,4,5,6];
+var j;
+for(var i=1;i<a.length;i=i+2)
+{
+a[i-1].style.visibility="hidden";
+a[i].style.visibility="visible";
+j=Math.floor(Math.random()*arr.length);
+a[i].innerHTML=arr[j];
+arr.splice(j,1);
+}
+
+}
+if(n==2)
+fun2();
+}
+
+function fun2()
+{
+
+var s=1;
+
+var a=document.getElementsByClassName("0");
+var mat=new Array([],[],[],[],[],[]);
+for(var i=0;i<6;i++)
+for(var j=0;j<6;j++,s=s+2)
+mat[i][j]=a[s];
+
+
+var b=document.getElementsByClassName("200");
+var arr=[1,2,3,4,5,6];
+var bol=fun3(mat,arr,b,1,2);
+
+ var opp=1;
+
+for(var i=0;i<6;i++)
+for(var j=0;j<6;j++,opp=opp+2)
+solution[i][j]=Number(a[opp].innerHTML);
+
+fun4();
+}
+
+function fun4()
+{
+var a=document.getElementsByClassName("0");
+var b=new Array();
+for(i=0;i<36;i++)
+b[i]=i;
+var x=Math.floor(Math.random()*4);
+for(i=0;i<15;i++)  //to edit
+{
+var t=Math.floor(Math.random()*b.length);
+a[b[t]*2+1].innerHTML=0;
+a[b[t]*2].style.visibility="visible";
+a[b[t]*2+1].style.visibility="hidden";
+b.splice(t,1);
+}
+}
+
+
+
+
+
+function fun3(mat,arr,b,n,l)
+{
+if (l>6)
+return true;
+if(n%7==0)
+{console.log(l);
+var arr=[1,2,3,4,5,6];
+var c=document.getElementsByClassName(l*100);
+var bol=fun3(mat,arr,c,1,l);
+return bol;
+
+}
+else
+{
+var bb=new Array();
+for(var i=0;i<b.length;i++)
+bb[i]=b[i];
+var y=0,z=0;
+var brr=new Array();
+for(var i=0;i<arr.length;i++)
+brr[i]=arr[i];
+
+for(var i=0;i<6;i++)
+for(var j=0;j<6;j++)
+if(mat[i][j]==b[n*2-1])
+{
+y=i;
+z=j;
+
+}
+
+for( var m=0;m<6;m++)
+{
+var t=brr.indexOf(Number(mat[y][m].innerHTML));
+if(t!=-1)
+brr.splice(t,1);
+var t=brr.indexOf(Number(mat[m][z].innerHTML));
+if(t!=-1)
+brr.splice(t,1);
+}
+
+if(brr.length<=0)
+return false;
+else
+{var crr=new Array();
+
+for(var i=0;i<brr.length;i++)
+{
+
+for(var j=0;j<arr.length;j++)
+crr[j]=arr[j];
+
+arr.splice(arr.indexOf(brr[i]),1);
+
+bb[n*2-1].innerHTML=brr[i];
+if((n+1)%7==0)
+l=l+1;
+ var bol=fun3(mat,arr,b,n+1,l);
+if(bol==true)
+{
+bb[n*2-2].style.visibility="hidden";
+bb[n*2-1].style.visibility="visible";
+return true;
+}
+for(var j=0;j<crr.length;j++)
+arr[j]=crr[j];
+
+}
+bb[n*2-1].innerHTML=0;
+
+}
+return false;
+}
+
+
+}
+
+function getanswer()
+{
+alert("get answer at console \n press shift+ctrl+c then click console")
+console.log(solution);
+}
+
+</script>
+<nav class="navbar navbar-dark bg-dark">
+    <div class="container">
+        <div class="navbar-header">
+            <a href="#" class="navbar-brand"><strong>GamingHub</strong></s></a>
+        </div>   
+            
+    </div>
+    
+</nav>
+<div id = "outer">
+    <center>
+<table id="table" style="visibility:hidden" size="20" height="10" widht= "10" border=2 bordercolor="red" >
+<tr>
+<td><input type="text" class="0 100" size=1 maxlength="1" ><lable class="0 100"  style="visibility:hidden"><b>0</b></lable></input></td>
+<td><input type="text" class="0 100" size=1 maxlength="1" ><lable class="0 100"  style="visibility:hidden">0</lable></input></td>
+<td><input type="text" class="0 100" size=1 maxlength="1" ><lable class="0 100"  style="visibility:hidden">0</lable></input></td>
+<td><input type="text" class="0 200" size=1 maxlength="1" ><lable class="0 200"  style="visibility:hidden">0</lable></input></td>
+<td><input type="text" class="0 200" size=1 maxlength="1" ><lable class="0 200"  style="visibility:hidden">0</lable></input></td>
+<td><input type="text" class="0 200" size=1 maxlength="1" ><lable class="0 200"  style="visibility:hidden">0</lable></input></td>
+
+</tr>
+<tr>
+<td><input type="text" class="0 100" size=1 maxlength="1"><lable class="0 100"  style="visibility:hidden">0</lable></input></td>
+<td><input type="text" class="0 100" size=1 maxlength="1" ><lable class="0 100"  style="visibility:hidden">0</lable></input></td>
+<td><input type="text" class="0 100" size=1 maxlength="1" ><lable class="0 100"  style="visibility:hidden">0</lable></input></td>
+<td><input type="text" class="0 200" size=1 maxlength="1" ><lable class="0 200"  style="visibility:hidden">0</lable></input></td>
+<td><input type="text" class="0 200" size=1 maxlength="1"><lable class="0 200"  style="visibility:hidden">0</lable></input></td>
+<td><input type="text" class="0 200" size=1 maxlength="1"><lable class="0 200"  style="visibility:hidden">0</lable></input></td>
+</tr>
+
+<tr >
+<td><input type="text" class="0 300" size=1 maxlength="1"><lable class="0 300"  style="visibility:hidden">0</lable></input></td>
+<td><input type="text" class="0 300" size=1 maxlength="1" ><lable class="0 300"  style="visibility:hidden">0</lable></input></td>
+<td><input type="text" class="0 300" size=1 maxlength="1" ><lable class="0 300"  style="visibility:hidden">0</lable></input></td>
+<td><input type="text" class="0 400" size=1 maxlength="1" ><lable class="0 400"  style="visibility:hidden">0</lable></input></td>
+<td><input type="text" class="0 400" size=1 maxlength="1" ><lable class="0 400"  style="visibility:hidden">0</lable></input></td>
+<td><input type="text" class="0 400" size=1 maxlength="1" ><lable class="0 400"  style="visibility:hidden">0</lable></input></td>
+</tr>
+<tr >
+<td><input type="text" class="0 300" size=1 maxlength="1" ><lable class="0 300"  style="visibility:hidden">0</lable></input></td>
+<td><input type="text" class="0 300" size=1 maxlength="1" ><lable class="0 300"  style="visibility:hidden">0</lable></input></td>
+<td><input type="text" class="0 300" size=1 maxlength="1" ><lable class="0 300"  style="visibility:hidden">0</lable></input></td>
+<td><input type="text" class="0 400" size=1 maxlength="1" ><lable class="0 400"  style="visibility:hidden">0</lable></input></td>
+<td><input type="text" class="0 400" size=1 maxlength="1" ><lable class="0 400"  style="visibility:hidden">0</lable></input></td>
+<td><input type="text" class="0 400" size=1 maxlength="1" ><lable class="0 400"  style="visibility:hidden">0</lable></input></td>
+</tr>
+<tr>
+<td><input type="text" class="0 500" size=1 maxlength="1" ><lable class="0 500"  style="visibility:hidden">0</lable></input></td>
+<td><input type="text" class="0 500" size=1 maxlength="1" ><lable class="0 500"  style="visibility:hidden">0</lable></input></td>
+<td><input type="text" class="0 500" size=1 maxlength="1" ><lable class="0 500"  style="visibility:hidden">0</lable></input></td>
+<td><input type="text" class="0 600" size=1 maxlength="1" ><lable class="0 600"  style="visibility:hidden">0</lable></input></td>
+<td><input type="text" class="0 600" size=1 maxlength="1" ><lable class="0 600"  style="visibility:hidden">0</lable></input></td>
+<td><input type="text" class="0 600" size=1 maxlength="1" ><lable class="0 600"  style="visibility:hidden">0</lable></input></td>
+</tr>
+<tr>
+<td><input type="text" class="0 500" size=1 maxlength="1" ><lable class="0 500"  style="visibility:hidden">0</lable></input></td>
+<td><input type="text" class="0 500" size=1 maxlength="1" ><lable class="0 500"  style="visibility:hidden">0</lable></input></td>
+<td><input type="text" class="0 500" size=1 maxlength="1" ><lable class="0 500"  style="visibility:hidden">0</lable></input></td>
+<td><input type="text" class="0 600" size=1 maxlength="1" ><lable class="0 600"  style="visibility:hidden">0</lable></input></td>
+<td><input type="text" class="0 600" size=1 maxlength="1" ><lable class="0 600"  style="visibility:hidden">0</lable></input></td>
+<td><input type="text" class="0 600" size=1 maxlength="1" ><lable class="0 600"  style="visibility:hidden">0</lable></input></td>
+</tr>
+
+
+</table>
+</center>
+</div>
+<div style="margin-top: 10px;">
+<center>
+<div class="justify-content-center">
+    <button id="button2" style="visibility:visible" onclick="table3009()" class="btn btn-danger">Generate Puzzle</button>
+</div>
+
+<div>
+    <button id="button1"   style="visibility:hidden" onclick="tocheck()" class="btn btn-primary" style="margin-right: 2px;">Check</button>
+    <button id="button3"   style="visibility:hidden" onclick="getanswer()" class="btn btn-primary">Get answer</button><br>
+</div>
+</center>
+</div>
+</html>
