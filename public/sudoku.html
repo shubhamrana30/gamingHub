@@ -204,8 +204,20 @@ return false;
 
 function getanswer()
 {
-alert("get answer at console \n press shift+ctrl+c then click console")
+//alert("get answer at console \n press shift+ctrl+c then click console")
 console.log(solution);
+var answer = document.getElementsByClassName("answer")
+var s = 0;
+console.log(answer[0].innerHTML + " " + answer[0].innerTEXT + " " + answer[0].value)
+for( i=0; i<6; i++)
+{
+    for(var j=0; j<6; j++)
+    {
+        answer[s++].innerHTML = solution[i][j];
+    }
+}
+console.log("jfds")
+document.getElementById("secondOuter").style.display = "inline"
 }
 
 </script>
@@ -287,5 +299,60 @@ console.log(solution);
     <button id="button3"   style="visibility:hidden" onclick="getanswer()" class="btn btn-primary">Get answer</button><br>
 </div>
 </center>
+</div>
+<div id="secondOuter" style="margin-top: 20px; display: none;">
+    <center>
+        <table id="finalTable"  size = "20" border=2 width="350px" bordercolor="red" >
+            <tr>
+                <td size = 1 ><label class="answer">1</label></td>
+                <td ><label class="answer">1</label></td>
+                <td ><label class="answer">1</label></td>
+                <td ><label class="answer">1</label></td>
+                <td ><label class="answer">1</label></td>
+                <td ><label class="answer">1</label></td>
+            </tr>
+            <tr>
+                <td ><label class="answer">1</label></td>
+                <td ><label class="answer">1</label></td>
+                <td ><label class="answer">1</label></td>
+                <td ><label class="answer">1</label></td>
+                <td ><label class="answer">1</label></td>
+                <td ><label class="answer">1</label></td>
+            </tr>
+            <tr>
+                <td ><label class="answer">1</label></td>
+                <td ><label class="answer">1</label></td>
+                <td ><label class="answer">1</label></td>
+                <td ><label class="answer">1</label></td>
+                <td ><label class="answer">1</label></td>
+                <td ><label class="answer">1</label></td>
+            </tr>
+            <tr>
+                <td ><label class="answer">1</label></td>
+                <td ><label class="answer">1</label></td>
+                <td ><label class="answer">1</label></td>
+                <td ><label class="answer">1</label></td>
+                <td ><label class="answer">1</label></td>
+                <td ><label class="answer">1</label></td>
+            </tr>
+            <tr>
+                <td ><label class="answer">1</label></td>
+                <td ><label class="answer">1</label></td>
+                <td ><label class="answer">1</label></td>
+                <td ><label class="answer">1</label></td>
+                <td ><label class="answer">1</label></td>
+                <td ><label class="answer">1</label></td>
+            </tr>
+            <tr>
+                <td ><label class="answer">1</label></td>
+                <td ><label class="answer">1</label></td>
+                <td ><label class="answer">1</label></td>
+                <td ><label class="answer">1</label></td>
+                <td ><label class="answer">1</label></td>
+                <td ><label class="answer">1</label></td>
+            </tr>
+            
+        </table>
+    </center>
 </div>
 </html>

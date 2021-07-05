@@ -11,3 +11,12 @@ a{
     padding-top: 100px;
     width: 100%;
 }
+
+#secondOuter{
+    width: 100%;
+    display: block;
+}
+#finalTable{
+    margin-top: 20px;
+    color: black;
+}
